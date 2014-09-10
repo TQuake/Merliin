@@ -4,8 +4,6 @@
 
 
 #include "JoystickDriver.c"
-var leftRatio = ;
-var rightRatio = 0;
 
 task main()
 {
@@ -15,19 +13,11 @@ task main()
 	{
 		getJoystickSettings(joystick);
 
-		if(abs(joystick.joy1_y2) > threshold){ // If the right analog stick's Y-axis readings are either above or below the threshold:
+		if(arcadeControl(joystick.joy1_y2, joystick.joy1_x2, 5) > threshold){ // If the right analog stick's Y-axis readings are either above or below the threshold:
 			motor[motorD] = -joystick.joy1_y2; // Motor D is assigned a power level equal to the right analog stick's Y-axis reading.
 		}
 		else {// Else if the readings are within the threshold:
 			motor[motorD] = 0; // Motor D is stopped with a power level of 0.
-		}
-
-		if(abs(joystick.joy1_y1) > threshold) {// If the left analog stick's Y-axis readings are either above or below the threshold:
-			motor[motorE] = -joystick.joy1_y1; // Motor E is assigned a power level equal to the left analog stick's Y-axis reading.
-		}
-		else {// Else if the readings are within the threshold:
-
-			motor[motorE] = 0; // Motor E is stopped with a power level of 0.
 		}
 	};
 };
